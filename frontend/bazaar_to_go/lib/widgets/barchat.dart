@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';  // Import the fl_chart package
+import 'package:fl_chart/fl_chart.dart';
+import 'package:get/get.dart'; // Import the fl_chart package
 
 class CustomBarChartWidget extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class CustomBarChartWidget extends StatelessWidget {
 
     List<BarChartGroupData> barChartData = [
       BarChartGroupData(x: 0, barRods: [
-        BarChartRodData(fromY: 30, color: Colors.lime, width: 20,toY: 5),
+        BarChartRodData(fromY: 30, color: Colors.lime, width: 20, toY: 5),
       ]),
       BarChartGroupData(x: 1, barRods: [
         BarChartRodData(fromY: 65, color: Colors.blue, width: 20, toY: 4),
@@ -55,7 +56,8 @@ class CustomBarChartWidget extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Text(
                               "TOTAL 95",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
                             ),
                           ),
                           SizedBox(height: 16),
@@ -69,6 +71,24 @@ class CustomBarChartWidget extends StatelessWidget {
                             color: Colors.blue,
                             text: "TO BE DELIVERED",
                           ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Get.snackbar(
+                                  "Report", "Report downloaded successfully");
+                            },
+                            child: Text(
+                              "Download report",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                            ),
+                          )
                         ],
                       ),
                     ),

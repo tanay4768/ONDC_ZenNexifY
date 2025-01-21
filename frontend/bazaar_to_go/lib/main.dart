@@ -1,16 +1,10 @@
-import 'package:bazaar_to_go/view/Dashboard/chat_bot.dart';
-import 'package:bazaar_to_go/view/auth/register_screen.dart';
 import 'package:bazaar_to_go/view/on_boarding.dart';
-import 'package:bazaar_to_go/view/order/order.dart';
-import 'package:bazaar_to_go/view/profile/profile.dart';
-import 'package:bazaar_to_go/view/store/catelog.dart';
-import 'package:bazaar_to_go/view/store/register_shop.dart';
+import 'package:bazaar_to_go/view/product_upload/upload_product_screen.dart';
 import 'package:bazaar_to_go/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +19,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home:  OnBoarding(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
         // Get the media query size
@@ -52,6 +45,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-

@@ -1,9 +1,6 @@
 import 'dart:convert';
-
 import 'package:bazaar_to_go/controllers/login_controller.dart';
-import 'package:bazaar_to_go/view/auth/register_screen.dart';
 import 'package:bazaar_to_go/view/auth/signup_screen.dart';
-import 'package:bazaar_to_go/view/splash_screen.dart';
 import 'package:bazaar_to_go/widgets/bnb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +10,6 @@ import '../../repository/api_service.dart';
 import '../../repository/endpoint.dart';
 
 class LoginScreen extends StatelessWidget {
-  
   LoginScreen({super.key});
   void _onLogin() async {
     print(_usernameController.text);
@@ -28,7 +24,6 @@ class LoginScreen extends StatelessWidget {
       );
 
       if (response.statusCode == 200) {
-
         final responseData = jsonDecode(response.body);
 
         Get.snackbar(
@@ -38,7 +33,9 @@ class LoginScreen extends StatelessWidget {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        Get.offAll((bnb(username: _usernameController.text,)));
+        Get.offAll((bnb(
+          username: _usernameController.text,
+        )));
       } else {
         print("Login Failed: ${response.statusCode}, ${response.body}");
         Get.snackbar(
@@ -61,7 +58,6 @@ class LoginScreen extends StatelessWidget {
       );
     }
   }
-
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -106,16 +102,23 @@ class LoginScreen extends StatelessWidget {
                       controller: _usernameController,
                     ),
                     SizedBox(height: 20.h),
-                    TextFormField(
-                      obscureText: !controller.showPassword.value,
-                      decoration: InputDecoration(
-                          labelText: 'Password',
-                          prefixIcon: const Icon(Icons.lock),
-                          suffixIcon:  Obx(()=>IconButton(onPressed:()=>controller.togglePassword, icon: !controller.showPassword.value? const Icon(Icons.visibility): const Icon(Icons.visibility_off)),),
-                          border: const OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: kDarkBlueColor))),
-                      controller: _passwordController,
+                    Obx(
+                      () => TextFormField(
+                        obscureText: controller.showPassword.value,
+                        decoration: InputDecoration(
+                            labelText: 'Password',
+                            prefixIcon: const Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                              onPressed: () => controller.togglePassword(),
+                              icon: Obx(() => Icon(controller.showPassword.value
+                                  ? Icons.visibility
+                                  : Icons.visibility_off)),
+                            ),
+                            border: const OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: kDarkBlueColor))),
+                        controller: _passwordController,
+                      ),
                     ),
                     const SizedBox(height: 10),
                     Align(
@@ -127,10 +130,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: (){
+                      onPressed: () {
                         _onLogin();
-                      }
-                      ,
+                      },
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size(240.w, 48.h),
                           backgroundColor: kDarkBlueColor),

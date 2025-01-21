@@ -99,5 +99,6 @@ class RegistrationController extends GetxController {
     void updateSelfLoading() {
       selfloading.value = !selfloading.value;
     }
+    
   }
 

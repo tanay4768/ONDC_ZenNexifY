@@ -23,7 +23,7 @@ class Attribute {
 }
 
 class Product {
-  String productId;
+  String? productId;
   String title;
   double rating;
   double price;
@@ -34,7 +34,7 @@ class Product {
   List<String> images;
 
   Product({
-    required this.productId,
+    this.productId,
     required this.title,
     required this.rating,
     required this.price,
@@ -66,7 +66,9 @@ class Product {
       productId: json['asin'] ?? '', // Use 'asin' as productId
       title: json['title'] ?? 'No Title',
       rating: (json['rating'] != null) ? json['rating'].toDouble() : 0.0,
-      price: (json['buybox']['price']['value'] != null) ? json['buybox']['price']['value'].toDouble() : 0.0,
+      price: (json['buybox']['price']['value'] != null)
+          ? json['buybox']['price']['value'].toDouble()
+          : 0.0,
       description: json['description'] ?? "Not available",
       category: json['categories'] != null && json['categories'].isNotEmpty
           ? json['categories'][0]['title'] // Get the first category title

@@ -24,9 +24,9 @@ class SignupScreen extends StatelessWidget {
           'username': _username.text.toString(),
           'email': _emailController.text.toString(),
           'password': _passwordController.text.toString()
-        }as Map<String, dynamic>,
+        } as Map<String, dynamic>,
       );
-print("1");
+      print("1");
       if (response.statusCode == 201 || response.statusCode == 200) {
         Get.snackbar(
           'Success',
@@ -35,7 +35,6 @@ print("1");
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-
 
         Get.offAll(RegisterScreen(username: _username.text));
       } else {
@@ -63,7 +62,7 @@ print("1");
 
   SignupScreen({super.key});
   final Color kDarkBlueColor = const Color(0xFF363AC2);
-   final TextEditingController _username = TextEditingController();
+  final TextEditingController _username = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   @override
@@ -104,8 +103,7 @@ print("1");
                                 const Icon(CupertinoIcons.person_alt_circle),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: kDarkBlueColor))
-                        ),
+                                borderSide: BorderSide(color: kDarkBlueColor))),
                         controller: _username,
                       ),
                       SizedBox(height: 20.h),
@@ -119,23 +117,19 @@ print("1");
                         controller: _emailController,
                       ),
                       SizedBox(height: 20.h),
-                      TextFormField(
-                        obscureText: true,
+                      Obx(()=>TextFormField(
+                        obscureText: controller.showPassword.value,
                         decoration: InputDecoration(
                             labelText: 'Password',
                             prefixIcon: const Icon(Icons.lock),
-                            suffixIcon: Obx(
-                              () => IconButton(
-                                  onPressed: () => controller.togglePassword,
-                                  icon: !controller.showPassword.value
-                                      ? const Icon(Icons.visibility)
-                                      : const Icon(Icons.visibility_off)),
-                            ),
+                            suffixIcon: IconButton(
+                                  onPressed: () => controller.togglePassword(),
+                                  icon: Obx(()=>Icon( controller.showPassword.value ? Icons.visibility : Icons.visibility_off)),),
                             border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: kDarkBlueColor))),
                         controller: _passwordController,
-                      ),
+                      ),),
                       SizedBox(height: 20.h),
                       ElevatedButton(
                         onPressed: () {

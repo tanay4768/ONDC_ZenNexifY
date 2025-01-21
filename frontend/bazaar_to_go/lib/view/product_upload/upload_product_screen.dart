@@ -1,11 +1,14 @@
-import 'package:bazaar_to_go/model/product.dart';
+import 'package:bazaar_to_go/model/product.dart' as prd;
 import 'package:bazaar_to_go/view/product_upload/find_similar.dart';
 import 'package:bazaar_to_go/view/product_upload/product_form_page.dart';
+import 'package:bazaar_to_go/view/product_upload/product_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/upload_product_controller.dart';
 
 class UploadProductScreen extends StatelessWidget {
+  final username;
+  UploadProductScreen(this.username);
   final Color kDarkBlueColor = const Color(0xFF363AC2);
   final controller = Get.put(UploadProductController());
 
@@ -32,45 +35,58 @@ class UploadProductScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 20),
-           ElevatedButton(
-                      onPressed: (){
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kDarkBlueColor),
-                      child: const Text(
-                        'Upload Manually',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ),
-            SizedBox(height: 20),
-           ElevatedButton(
-                      onPressed: (){
-                        Get.to(FindSimilar());
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kDarkBlueColor),
-                      child: const Text(
-                        'Product from Platfrom',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ),
+            ElevatedButton(
+              onPressed: () {
+                Get.to(ProductListPage());
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(300, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  backgroundColor: kDarkBlueColor),
+              child: const Text(
+                'Upload Manually',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
             SizedBox(height: 20),
             ElevatedButton(
-                      onPressed: (){
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kDarkBlueColor),
-                      child: const Text(
-                        'Upload using AI',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ),
+              onPressed: () {
+                Get.to(FindSimilar());
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(300, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  backgroundColor: kDarkBlueColor),
+              child: const Text(
+                'Product from Platfrom',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
             SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  fixedSize: Size(300, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  backgroundColor: kDarkBlueColor),
+              child: const Text(
+                'Upload using AI',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+            ),
+            SizedBox(height: 20),
+            Divider(),
             Text("Use our Template",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             SizedBox(height: 20),
             SizedBox(
-              height: 350,
+              height: 400,
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -88,7 +104,7 @@ class UploadProductScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTemplateCard(Product product) {
+  Widget buildTemplateCard(prd.Product product) {
     return GestureDetector(
       onTap: () async {
         Get.to(ProductFormPage(initialInstance: product));

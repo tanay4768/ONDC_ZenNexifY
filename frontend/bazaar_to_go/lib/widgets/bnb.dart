@@ -1,4 +1,5 @@
 import 'package:bazaar_to_go/view/order/order.dart';
+import 'package:bazaar_to_go/view/product_upload/upload_product_screen.dart';
 import 'package:bazaar_to_go/view/store/register_shop.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,25 +10,30 @@ import '../view/order/ordersum.dart';
 import '../view/profile/profile.dart';
 
 class bnb extends StatelessWidget {
-
   final String username;
-  final BottomNavController bottomNavController = Get.put(BottomNavController());
+  final BottomNavController bottomNavController =
+      Get.put(BottomNavController());
   bnb({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
     final List<Widget> screens = [
-      Dashboardview(username: username,),
-      RegisterShop(username: username,),
+      Dashboardview(
+        username: username,
+      ),
+      RegisterShopPage(
+        username: username,
+      ),
       OrdersSummary(),
-      ProfileView(username : username),
+      UploadProductScreen(username),
+      ProfileView(username: username),
     ];
 
     return Scaffold(
       body: Obx(() => AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        child: screens[bottomNavController.selectedIndex.value],
-      )),
+            duration: const Duration(milliseconds: 300),
+            child: screens[bottomNavController.selectedIndex.value],
+          )),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
           currentIndex: bottomNavController.selectedIndex.value,
@@ -42,19 +48,28 @@ class bnb extends StatelessWidget {
           showUnselectedLabels: true,
           items: [
             BottomNavigationBarItem(
-              icon: _buildIcon(Icons.home, bottomNavController.selectedIndex.value == 0),
+              icon: _buildIcon(
+                  Icons.home, bottomNavController.selectedIndex.value == 0),
               label: 'Dashboard',
             ),
             BottomNavigationBarItem(
-              icon: _buildIcon(Icons.store, bottomNavController.selectedIndex.value == 1),
+              icon: _buildIcon(
+                  Icons.store, bottomNavController.selectedIndex.value == 1),
               label: 'Store',
             ),
             BottomNavigationBarItem(
-              icon: _buildIcon(Icons.shopping_cart, bottomNavController.selectedIndex.value == 2),
+              icon: _buildIcon(Icons.shopping_cart,
+                  bottomNavController.selectedIndex.value == 2),
               label: 'Order',
             ),
             BottomNavigationBarItem(
-              icon: _buildIcon(Icons.person, bottomNavController.selectedIndex.value == 3),
+              icon: _buildIcon(
+                  Icons.upload, bottomNavController.selectedIndex.value == 3),
+              label: 'Upload',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon(
+                  Icons.person, bottomNavController.selectedIndex.value == 4),
               label: 'Profile',
             ),
           ],
@@ -73,7 +88,8 @@ class bnb extends StatelessWidget {
         color: isSelected ? Colors.blue.withOpacity(0.2) : Colors.transparent,
         shape: BoxShape.circle,
       ),
-      child: Icon(icon, color: isSelected ? Colors.blueAccent : Colors.grey[600]),
+      child:
+          Icon(icon, color: isSelected ? Colors.blueAccent : Colors.grey[600]),
     );
   }
 }

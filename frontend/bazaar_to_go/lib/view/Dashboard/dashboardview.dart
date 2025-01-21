@@ -270,7 +270,8 @@ class _ReportCardState extends State<ReportCard> with SingleTickerProviderStateM
             position: _slideAnimation,
             child: Opacity(
               opacity: _opacity.value,
-              child: Card(
+              child: Card.filled(
+                color: Colors.white,
                 elevation: 5,
                 child: Container(
                   padding: EdgeInsets.all(16),
