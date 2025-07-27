@@ -11,7 +11,7 @@ Bazaar To-Go is an all-in-one marketplace solution designed to empower sellers a
 
 ## Tech Stack Used
 
-1. Frontend: React.js
+1. Frontend: Flutter
 
 2. Backend: Python (Flask/Django)
 
@@ -74,11 +74,8 @@ Bazaar To-Go is an all-in-one marketplace solution designed to empower sellers a
 
 2. Frontend:
 
- -> React.js: Frontend library
+ -> Flutter & Dart
 
- -> Axios: For API calls
-
- -> Chart.js: For visualizing analytics
 
 3. Additional Tools:
 
